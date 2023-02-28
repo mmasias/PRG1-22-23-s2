@@ -1,6 +1,6 @@
 # Archivo de José Cabrera
 
-|Objetivos locales||
+|Objetivos locales|| 
 -|-
 |Repasar todo lo humanamente posible
 |Aprenderme la ciudad para movilizarme mas facil
