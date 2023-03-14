@@ -1,7 +1,7 @@
 class Prueba {
     public static void main(String[] args) {
 
-        int miLongitud = 5;
+        int miLongitud = 10;
         int LONGITUD = miLongitud*3;
 
         String lineaPorImprimir;
