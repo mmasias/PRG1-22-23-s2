@@ -26,7 +26,7 @@ public class retoArteJoseCabrera{
         System.out.println(" ");
 
         String lines = "+---------------+";
-        String dash2 = "|** ** ** ** ** |";
+        String dash2 = "| ** ** ** ** **|";
         String flip = "|** ** ** ** ** |";
 
         System.out.println(lines);
