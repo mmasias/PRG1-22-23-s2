@@ -6,6 +6,7 @@ class Prueba {
 
         String lineaPorImprimir;
 
+        
         for (int i = 0; i < LONGITUD; i++) {
             lineaPorImprimir = "  ".repeat(LONGITUD - i) +  "[]".repeat(i * 2);
             System.out.println(lineaPorImprimir);
