@@ -5,9 +5,9 @@
   - [x] Salida por consola
   - [x] Variables
   - [x] Entrada por consola
-  - [ ] Estructuras de control
-    - [ ] Alternativas
-    - [ ] Repetitivas
+  - [x] Estructuras de control
+    - [x] Alternativas
+    - [x] Repetitivas
   - [ ] Métodos estáticos
   - [ ] Matrices
 
