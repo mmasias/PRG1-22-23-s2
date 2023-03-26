@@ -9,7 +9,7 @@ class retoForIf {
             for (int i = 1; i <= dimension; i = i + 1) {
 
                 if (
-                    i == j + 1 || i + 1 == j
+                    i == j || i + j == 22 - 1
                 ) {
                     System.out.print("(*)");
                 } else {
