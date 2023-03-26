@@ -9,7 +9,7 @@ class retoForIf {
             for (int i = 1; i <= dimension; i = i + 1) {
 
                 if (
-                    i >= 1 && i <= 5 || j >= 1 && j <= 5
+                    i %2 == j %2
                 ) {
                     System.out.print("(*)");
                 } else {
@@ -18,5 +18,6 @@ class retoForIf {
             }
             System.out.println();
         }
+            System.out.println();
+        }
     }
-}
