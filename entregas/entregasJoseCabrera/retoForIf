@@ -9,7 +9,7 @@ class retoForIf {
             for (int i = 1; i <= dimension; i = i + 1) {
 
                 if (
-                    i %2 == j %2
+                    i == 21 / 2 || j == 21 / 2
                 ) {
                     System.out.print("(*)");
                 } else {
