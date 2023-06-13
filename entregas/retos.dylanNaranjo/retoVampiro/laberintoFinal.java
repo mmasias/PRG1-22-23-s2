@@ -40,10 +40,10 @@ public class laberintoFinal {
 
         boolean caminando = true;
         String accion;
-        bienvenidaalPrograma();
+        bienvenidaAlPrograma();
 
         while (caminando) {
-            comandosdelPrograma();
+            comandosDelPrograma();
             System.out.print("Ingrese comando: ");
             accion = entrada.nextLine();
             if (accion.length() > 1) {
@@ -76,7 +76,7 @@ public class laberintoFinal {
                     caminando = false;
                     break;
                 case "g":
-                    antorchaAlcancelargo();
+                    antorchaAlcanceLargo();
                     break;
                 default:
                     errorComando();
@@ -130,16 +130,16 @@ public class laberintoFinal {
         System.out.println("Comando Inválido!");
     }
 
-    static void bienvenidaalPrograma() {
+    static void bienvenidaAlPrograma() {
         System.out.println(
                 "Hola, Indiana Jones. Spawneaste en un laberinto. Empieza a caminar a ver si encuentras una salida...");
     }
 
-    static void comandosdelPrograma() {
+    static void comandosDelPrograma() {
         System.out.println("[w] Arriba, [s] Abajo, [a] Izquierda, [d] Derecha, [g] Gema,  [f] Fin del Juego.");
     }
 
-    static void antorchaAlcancelargo() {
+    static void antorchaAlcanceLargo() {
         {
             alcanceAntorcha = 100;
             imprimeLaberinto();
@@ -185,7 +185,7 @@ public class laberintoFinal {
         System.out.println("|----------------------------------------------------------|");
     }
 
-    static int movimientodelvampiro() {
+    static int movimientoDelvampiro() {
 
         double probabilidadMovimiento = Math.random();
         if (probabilidadMovimiento < 0.40) {
@@ -198,7 +198,7 @@ public class laberintoFinal {
     }
 
     static int nuevaPosicionX(int viejaPosicionX, int viejaPosicionY) {
-        int variacion = movimientodelvampiro();
+        int variacion = movimientoDelvampiro();
         int nuevaPosicionX = viejaPosicionX;
         if ((viejaPosicionX + variacion >= minimoX && viejaPosicionX + variacion <= maximoX)) {
             if ((viejaPosicionX + variacion != minimoX && viejaPosicionX + variacion != maximoX)) {
@@ -211,7 +211,7 @@ public class laberintoFinal {
     }
 
     static int nuevaPosicionY(int viejaPosicionX, int viejaPosicionY) {
-        int variacion = movimientodelvampiro();
+        int variacion = movimientoDelvampiro();
         int nuevaPosicionY = viejaPosicionY;
         if ((viejaPosicionY + variacion >= minimoY && viejaPosicionY + variacion <= maximoY)) {
             if ((viejaPosicionY + variacion != minimoY && viejaPosicionY + variacion != maximoY)) {

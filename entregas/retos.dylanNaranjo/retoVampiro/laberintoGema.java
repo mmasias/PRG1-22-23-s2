@@ -38,10 +38,10 @@ public class laberintoGema {
 
         boolean caminando = true;
         String accion;
-        bienvenidaalPrograma();
+        bienvenidaAlPrograma();
 
         while (caminando) {
-            comandosdelPrograma();
+            comandosDelPrograma();
             System.out.print("Ingrese comando: ");
             accion = entrada.nextLine();
             if (accion.length() > 1) {
@@ -123,12 +123,12 @@ public class laberintoGema {
         System.out.println("Comando Inválido!");
     }
 
-    static void bienvenidaalPrograma() {
+    static void bienvenidaAlPrograma() {
         System.out.println(
                 "Hola, Indiana Jones. Spawneaste en un laberinto. Empieza a caminar a ver si encuentras una salida...");
     }
 
-    static void comandosdelPrograma() {
+    static void comandosDelPrograma() {
         System.out.println("[w] Arriba, [s] Abajo, [a] Izquierda, [d] Derecha, [g] Gema,  [f] Fin del Juego.");
     }
 

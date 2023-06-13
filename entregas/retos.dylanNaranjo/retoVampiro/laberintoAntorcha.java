@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class LaberintoAntorcha {
+class laberintoAntorcha {
 
     static int[][] mapaLaberinto = {
             { 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -39,10 +39,10 @@ class LaberintoAntorcha {
 
         boolean caminando = true;
         String accion;
-        bienvenidaalPrograma();
+        bienvenidaAlPrograma();
 
-        while (caminando) {
-            comandosdelPrograma();
+        while (caminando = true) {
+            comandosDelPrograma();
             System.out.print("Ingrese comando: ");
             accion = entrada.nextLine();
             if (accion.length() > 1) {
@@ -121,12 +121,12 @@ class LaberintoAntorcha {
         System.out.println("Comando Inválido!");
     }
 
-    static void bienvenidaalPrograma() {
+    static void bienvenidaAlPrograma() {
         System.out.println(
                 "Hola, Indiana Jones. Spawneaste en un laberinto. Empieza a caminar a ver si encuentras una salida...");
     }
 
-    static void comandosdelPrograma() {
+    static void comandosDelPrograma() {
         System.out.println("[w] Arriba, [s] Abajo, [a] Izquierda, [d] Derecha, [f] Fin del Juego.");
     }
 
