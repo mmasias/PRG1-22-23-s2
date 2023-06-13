@@ -21,10 +21,10 @@ public class laberintoGema {
 
     static int personajePosicionX;
     static int personajePosicionY;
-    static int minimoX; // Minimo en el X que el Personaje se puede mover en el Mapa//
-    static int minimoY; // Minimo en el Y que el Personaje se puede mover en el Mapa//
-    static int maximoX; // Maximo en el X que el Personaje se puede mover en el Mapa//
-    static int maximoY; // Maximo en el Y que el Personaje se puede mover en el Mapa//
+    static int minimoX;
+    static int minimoY;
+    static int maximoX;
+    static int maximoY;
     static int alcanceAntorcha = 2;
 
     public static void main(String[] args) {
@@ -39,7 +39,6 @@ public class laberintoGema {
         boolean caminando = true;
         String accion;
         bienvenidaalPrograma();
-        mostrarlaberinto();
 
         while (caminando) {
             comandosdelPrograma();
@@ -52,19 +51,19 @@ public class laberintoGema {
             switch (accion) {
                 case "w":
                     arriba();
-                    mostrarlaberinto();
+                    imprimeLaberinto();
                     break;
                 case "s":
                     abajo();
-                    mostrarlaberinto();
+                    imprimeLaberinto();
                     break;
                 case "d":
                     derecha();
-                    mostrarlaberinto();
+                    imprimeLaberinto();
                     break;
                 case "a":
                     izquierda();
-                    mostrarlaberinto();
+                    imprimeLaberinto();
                     break;
                 case "f":
                     caminando = false;
@@ -74,7 +73,7 @@ public class laberintoGema {
                     break;
                 default:
                     errorComando();
-                    mostrarlaberinto();
+                    imprimeLaberinto();
                     break;
             }
         }
@@ -120,10 +119,6 @@ public class laberintoGema {
         System.out.print("!Chocaste con una pared! No puedes ir mas allá");
     }
 
-    static void mostrarlaberinto() {
-        imprimeLaberinto();
-    }
-
     static void errorComando() {
         System.out.println("Comando Inválido!");
     }
@@ -140,7 +135,7 @@ public class laberintoGema {
     static void antorchaAlcancelargo() {
         {
             alcanceAntorcha = 100;
-            mostrarlaberinto();
+            imprimeLaberinto();
             alcanceAntorcha = 2;
         }
     }

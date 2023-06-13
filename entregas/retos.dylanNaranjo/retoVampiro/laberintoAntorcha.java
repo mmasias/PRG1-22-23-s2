@@ -40,7 +40,6 @@ class LaberintoAntorcha {
         boolean caminando = true;
         String accion;
         bienvenidaalPrograma();
-        mostrarlaberinto();
 
         while (caminando) {
             comandosdelPrograma();
@@ -53,26 +52,26 @@ class LaberintoAntorcha {
             switch (accion) {
                 case "w":
                     arriba();
-                    mostrarlaberinto();
+                    imprimeLaberinto();
                     break;
                 case "s":
                     abajo();
-                    mostrarlaberinto();
+                    imprimeLaberinto();
                     break;
                 case "d":
                     derecha();
-                    mostrarlaberinto();
+                    imprimeLaberinto();
                     break;
                 case "a":
                     izquierda();
-                    mostrarlaberinto();
+                    imprimeLaberinto();
                     break;
                 case "f":
                     caminando = false;
                     break;
                 default:
                     errorComando();
-                    mostrarlaberinto();
+                    imprimeLaberinto();
                     break;
             }
         }
@@ -116,10 +115,6 @@ class LaberintoAntorcha {
 
     static void errorSalirTablero() {
         System.out.print("!Chocaste con una pared! No puedes ir mas allá");
-    }
-
-    static void mostrarlaberinto() {
-        imprimeLaberinto();
     }
 
     static void errorComando() {
