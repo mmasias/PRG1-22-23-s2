@@ -50,9 +50,9 @@ public class laberintoFinal {
                 accion = accion.substring(0, 1);
             }
 
-            for (int v = 0; v < 3; v = v + 1) {
-                vampiroPosicionX[v] = nuevaPosicionX(vampiroPosicionX[v], vampiroPosicionY[v]);
-                vampiroPosicionY[v] = nuevaPosicionY(vampiroPosicionX[v], vampiroPosicionY[v]);
+            for (int a = 0; a < 3; a = a + 1) {
+                vampiroPosicionX[a] = nuevaPosicionX(vampiroPosicionX[a], vampiroPosicionY[a]);
+                vampiroPosicionY[a] = nuevaPosicionY(vampiroPosicionX[a], vampiroPosicionY[a]);
             }
 
             switch (accion) {
@@ -167,8 +167,8 @@ public class laberintoFinal {
                             miElemento = "[]";
                         }
                         ;
-                        for (int v = 0; v < 3; v = v + 1) {
-                            if ((i == vampiroPosicionX[v]) && (j == vampiroPosicionY[v])) {
+                        for (int a = 0; a < 3; a = a + 1) {
+                            if ((i == vampiroPosicionX[a]) && (j == vampiroPosicionY[a])) {
                                 miElemento = "^^";
                             }
                         }
