@@ -46,7 +46,8 @@ class laberintoAntorcha {
         String accion;
         bienvenidaAlPrograma();
 
-        while (caminando) {
+        while (caminando == true) {
+            imprimeLaberinto();
             comandosDelPrograma();
             System.out.print("Ingrese comando: ");
             accion = entrada.nextLine();
@@ -60,26 +61,21 @@ class laberintoAntorcha {
             switch (accion) {
                 case "w":
                     arriba();
-                    imprimeLaberinto();
                     break;
                 case "s":
                     abajo();
-                    imprimeLaberinto();
                     break;
                 case "d":
                     derecha();
-                    imprimeLaberinto();
                     break;
                 case "a":
                     izquierda();
-                    imprimeLaberinto();
                     break;
                 case "f":
                     caminando = false;
                     break;
                 default:
                     errorComando();
-                    imprimeLaberinto();
                     break;
             }
         }
@@ -144,29 +140,33 @@ class laberintoAntorcha {
         for (int i = 0; i < mapaLaberinto.length; i++) {
             System.out.print("|");
             for (int j = 0; j < mapaLaberinto[i].length; j++) {
-                if ((i == personajePosicionX) && (j == personajePosicionY)) {
-                    System.out.print("IJ");
-                } else {
-                    if ((personajePosicionX + alcanceAntorcha >= i) && (personajePosicionX - alcanceAntorcha <= i)
-                            && (personajePosicionY + alcanceAntorcha >= j)
-                            && (personajePosicionY - alcanceAntorcha <= j)) {
-                        if ((i == vampiroPosicionX) && (j == vampiroPosicionY)) {
-                            System.out.print("^^");
-                        } else if (mapaLaberinto[i][j] == 1) {
-                            System.out.print("[]");
-                        } else {
-                            System.out.print("  ");
-                        }
-                        ;
-                    } else {
-                        System.out.print("  ");
-                    }
-                }
+                imprimirElemento(i, j);
             }
-            System.out.print("|");
-            System.out.println();
+            System.out.println("|");
         }
         System.out.println("+----------------------------------------------------------+");
+        System.out.println();
+    }
+
+    static void imprimirElemento(int i, int j) {
+        if ((i == personajePosicionX) && (j == personajePosicionY)) {
+            System.out.print("IJ");
+        } else if (personajeEnAlcance(i, j)) {
+            if ((i == vampiroPosicionX) && (j == vampiroPosicionY)) {
+                System.out.print("^^");
+            } else if (mapaLaberinto[i][j] == 1) {
+                System.out.print("[]");
+            } else {
+                System.out.print("  ");
+            }
+        } else {
+            System.out.print("  ");
+        }
+    }
+
+    static boolean personajeEnAlcance(int i, int j) {
+        return (personajePosicionX + alcanceAntorcha >= i) && (personajePosicionX - alcanceAntorcha <= i)
+                && (personajePosicionY + alcanceAntorcha >= j) && (personajePosicionY - alcanceAntorcha <= j);
     }
 
     static int movimientoDelvampiro() {

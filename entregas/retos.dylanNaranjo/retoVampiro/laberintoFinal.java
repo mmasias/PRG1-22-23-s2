@@ -42,7 +42,8 @@ public class laberintoFinal {
         String accion;
         bienvenidaAlPrograma();
 
-        while (caminando) {
+        while (caminando == true) {
+            imprimeLaberinto();
             comandosDelPrograma();
             System.out.print("Ingrese comando: ");
             accion = entrada.nextLine();
@@ -58,19 +59,15 @@ public class laberintoFinal {
             switch (accion) {
                 case "w":
                     arriba();
-                    imprimeLaberinto();
                     break;
                 case "s":
                     abajo();
-                    imprimeLaberinto();
                     break;
                 case "d":
                     derecha();
-                    imprimeLaberinto();
                     break;
                 case "a":
                     izquierda();
-                    imprimeLaberinto();
                     break;
                 case "f":
                     caminando = false;
@@ -80,7 +77,6 @@ public class laberintoFinal {
                     break;
                 default:
                     errorComando();
-                    imprimeLaberinto();
                     break;
             }
         }
@@ -148,41 +144,41 @@ public class laberintoFinal {
     }
 
     static void imprimeLaberinto() {
-        int i, j;
-        String miElemento = "";
-        System.out.println("");
+        System.out.println();
         System.out.println("+----------------------------------------------------------+");
-        for (i = 0; i < (mapaLaberinto.length); i = i + 1) {
+        for (int i = 0; i < mapaLaberinto.length; i++) {
             System.out.print("|");
-            for (j = 0; j < (mapaLaberinto[i].length); j = j + 1) {
-                miElemento = "  ";
-                if ((i == personajePosicionX) && (j == personajePosicionY)) {
-                    miElemento = "IJ";
-                } else {
-
-                    if ((personajePosicionX + alcanceAntorcha >= i) && (personajePosicionX - alcanceAntorcha <= i)
-                            && (personajePosicionY + alcanceAntorcha >= j)
-                            && (personajePosicionY - alcanceAntorcha <= j)) {
-                        if (mapaLaberinto[i][j] == 1) {
-                            miElemento = "[]";
-                        }
-                        ;
-                        for (int a = 0; a < 3; a = a + 1) {
-                            if ((i == vampiroPosicionX[a]) && (j == vampiroPosicionY[a])) {
-                                miElemento = "^^";
-                            }
-                        }
-                    } else {
-                        miElemento = "  ";
-                    }
-
-                }
+            for (int j = 0; j < mapaLaberinto[i].length; j++) {
+                String miElemento = obtenerElemento(i, j);
                 System.out.print(miElemento);
             }
-            System.out.print("|");
-            System.out.println();
+            System.out.println("|");
         }
-        System.out.println("|----------------------------------------------------------|");
+        System.out.println("+----------------------------------------------------------+");
+        System.out.println();
+    }
+
+    static String obtenerElemento(int i, int j) {
+        String miElemento = "  ";
+        if ((i == personajePosicionX) && (j == personajePosicionY)) {
+            miElemento = "IJ";
+        } else if (personajeEnAlcance(i, j)) {
+            if (mapaLaberinto[i][j] == 1) {
+                miElemento = "[]";
+            } else {
+                for (int a = 0; a < 3; a++) {
+                    if ((i == vampiroPosicionX[a]) && (j == vampiroPosicionY[a])) {
+                        miElemento = "^^";
+                    }
+                }
+            }
+        }
+        return miElemento;
+    }
+
+    static boolean personajeEnAlcance(int i, int j) {
+        return (personajePosicionX + alcanceAntorcha >= i) && (personajePosicionX - alcanceAntorcha <= i)
+                && (personajePosicionY + alcanceAntorcha >= j) && (personajePosicionY - alcanceAntorcha <= j);
     }
 
     static int movimientoDelvampiro() {

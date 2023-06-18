@@ -40,7 +40,8 @@ public class laberintoGema {
         String accion;
         bienvenidaAlPrograma();
 
-        while (caminando) {
+        while (caminando == true) {
+            imprimeLaberinto();
             comandosDelPrograma();
             System.out.print("Ingrese comando: ");
             accion = entrada.nextLine();
@@ -51,19 +52,15 @@ public class laberintoGema {
             switch (accion) {
                 case "w":
                     arriba();
-                    imprimeLaberinto();
                     break;
                 case "s":
                     abajo();
-                    imprimeLaberinto();
                     break;
                 case "d":
                     derecha();
-                    imprimeLaberinto();
                     break;
                 case "a":
                     izquierda();
-                    imprimeLaberinto();
                     break;
                 case "f":
                     caminando = false;
@@ -73,7 +70,6 @@ public class laberintoGema {
                     break;
                 default:
                     errorComando();
-                    imprimeLaberinto();
                     break;
             }
         }
@@ -82,7 +78,7 @@ public class laberintoGema {
     static void arriba() {
         if ((personajePosicionX > minimoX) && (mapaLaberinto[personajePosicionX - 1][personajePosicionY] != 1)) {
             personajePosicionX = personajePosicionX - 1;
-            System.out.print("Caminas hacia el arriba");
+            System.out.println("Caminas hacia el arriba");
         } else {
             errorSalirTablero();
         }
@@ -116,7 +112,7 @@ public class laberintoGema {
     }
 
     static void errorSalirTablero() {
-        System.out.print("!Chocaste con una pared! No puedes ir mas allá");
+        System.out.println("!Chocaste con una pared! No puedes ir mas allá");
     }
 
     static void errorComando() {
@@ -133,35 +129,44 @@ public class laberintoGema {
     }
 
     static void antorchaAlcancelargo() {
-        {
-            alcanceAntorcha = 100;
-            imprimeLaberinto();
-            alcanceAntorcha = 2;
-        }
+        alcanceAntorcha = 100;
+        imprimeLaberinto();
+        alcanceAntorcha = 2;
     }
 
     static void imprimeLaberinto() {
-        System.out.println();
-        System.out.println("+----------------------------------------------------------+");
+        imprimirSeparador();
         for (int i = 0; i < mapaLaberinto.length; i++) {
             System.out.print("|");
             for (int j = 0; j < mapaLaberinto[i].length; j++) {
-                if ((i == personajePosicionX) && (j == personajePosicionY)) {
-                    System.out.print("IJ");
-                } else if ((personajePosicionX + alcanceAntorcha >= i) && (personajePosicionX - alcanceAntorcha <= i)
-                        && (personajePosicionY + alcanceAntorcha >= j) && (personajePosicionY - alcanceAntorcha <= j)) {
-                    if (mapaLaberinto[i][j] == 1) {
-                        System.out.print("[]");
-                    } else {
-                        System.out.print("  ");
-                    }
-                } else {
-                    System.out.print("  ");
-                }
+                imprimirCasilla(i, j);
             }
             System.out.println("|");
         }
-        System.out.println("+----------------------------------------------------------+");
+        imprimirSeparador();
         System.out.println();
+    }
+
+    static void imprimirSeparador() {
+        System.out.println("+----------------------------------------------------------+");
+    }
+
+    static void imprimirCasilla(int i, int j) {
+        if ((i == personajePosicionX) && (j == personajePosicionY)) {
+            System.out.print("IJ");
+        } else if ((personajeEnAlcance(i, j))) {
+            if (mapaLaberinto[i][j] == 1) {
+                System.out.print("[]");
+            } else {
+                System.out.print("  ");
+            }
+        } else {
+            System.out.print("  ");
+        }
+    }
+
+    static boolean personajeEnAlcance(int i, int j) {
+        return (personajePosicionX + alcanceAntorcha >= i) && (personajePosicionX - alcanceAntorcha <= i)
+                && (personajePosicionY + alcanceAntorcha >= j) && (personajePosicionY - alcanceAntorcha <= j);
     }
 }
