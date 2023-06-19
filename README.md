@@ -6,7 +6,7 @@ Vamos a utilizar este espacio para los dos alumnos que somos...
 
 ## Contenidos
 
-- Temario
+- [Temario](/temario)
 - Retos
 - Enlaces interesantes
 
