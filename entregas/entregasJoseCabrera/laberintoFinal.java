@@ -25,84 +25,61 @@ public class laberintoFinal {
         System.out.flush();
     }
 
-    static int spotX, spotY;
-    static int limitInferiorX, limitInferiorY, limitSuperiorX, limitSuperiorY;
-    static int torchRange = 3;
     static int[] vampSpotX = { 10, 6, 4 }, vampSpotY = { 22, 4, 14 };
 
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
-        try {
-            spotX = 0;
-            spotY = 0;
+        boolean walk = true;
+        String accion;
 
-            limitInferiorX = 0;
-            limitInferiorY = 0;
-            limitSuperiorX = labyrinth.length - 1;
-            limitSuperiorY = labyrinth[0].length - 1;
+        int spotX = 0, limitInferiorX = 0, limitSuperiorX = labyrinth.length - 1;
+        ;
+        int spotY = 0, limitInferiorY = 0, limitSuperiorY = labyrinth[0].length - 1;
 
-            boolean walk = true;
-            String accion;
-            printLab();
+        printLabyrinth(spotX, spotY);
 
-            while (walk) {
-                commands();
-                System.out.print("Ingrese comando: ");
-                accion = entrada.nextLine();
+        while (walk) {
+            commands();
+            System.out.print("Ingrese comando: ");
+            accion = entrada.nextLine();
 
-                for (int v = 0; v < 3; v++) {
-                    vampSpotX[v] = newSpotX(vampSpotX[v], vampSpotY[v]);
-                    vampSpotY[v] = newSpotY(vampSpotX[v], vampSpotY[v]);
-                }
-
-                cleanConsole();
-
-                if (accion.equals("w")) {
-                    mover("north");
-                } else if (accion.equals("s")) {
-                    mover("south");
-                } else if (accion.equals("a")) {
-                    mover("east");
-                } else if (accion.equals("d")) {
-                    mover("west");
-                } else if (accion.equals("f")) {
-                    walk = false;
-                } else {
-                    System.out.println(
-                            "Movimiento no reconocido, intente con un valor valido.");
-                }
-                printLab();
+            for (int v = 0; v < 3; v++) {
+                vampSpotX[v] = newSpotX(vampSpotX[v], vampSpotY[v], limitInferiorX, limitSuperiorX);
+                vampSpotY[v] = newSpotY(vampSpotX[v], vampSpotY[v], limitInferiorY, limitSuperiorY);
             }
-        } finally {
-            entrada.close();
+
+            cleanConsole();
+
+            if (accion.equals("w")) {
+                spotX = moverX("norte", spotX, spotY, limitInferiorX, limitSuperiorX);
+            } else if (accion.equals("s")) {
+                spotX = moverX("sur", spotX, spotY, limitInferiorX, limitSuperiorX);
+            } else if (accion.equals("a")) {
+                spotY = moverY("este", spotX, spotY, limitInferiorY, limitSuperiorY);
+            } else if (accion.equals("d")) {
+                spotY = moverY("oeste", spotX, spotY, limitInferiorY, limitSuperiorY);
+            } else if (accion.equals("f")) {
+                walk = false;
+            } else {
+                System.out.println("Movimiento no reconocido, intente con un valor valido.");
+            }
+            printLabyrinth(spotX, spotY);
         }
+        printLabyrinth(spotX, spotY);
+
+        entrada.close();
     }
 
-    static void mover(String directions) {
+    static int moverX(String directions, int spotX, int spotY, int limitInferiorX, int limitSuperiorX) {
         switch (directions) {
-            case "east":
-                if ((spotY > limitInferiorY) && (labyrinth[spotX][spotY - 1] != 1)) {
-                    spotY = spotY - 1;
-                } else {
-                    System.out.print("Eso es un muro... ");
-                }
-                break;
-            case "west":
-
-                if ((spotY < limitSuperiorY) && (labyrinth[spotX][spotY + 1] != 1)) {
-                    spotY = spotY + 1;
-                } else {
-                    System.out.print("No puedes atravesar paredes... aun. ");
-                }
-                break;
-            case "south":
+            case "sur":
                 if ((spotX < limitSuperiorX) && (labyrinth[spotX + 1][spotY] != 1)) {
                     spotX = spotX + 1;
                 } else {
                     System.out.print("Te vas a lastimar si sigues asi. ");
                 }
                 break;
-            case "north":
+            case "norte":
                 if ((spotX > limitInferiorX) && (labyrinth[spotX - 1][spotY] != 1)) {
                     spotX = spotX - 1;
                 } else {
@@ -113,15 +90,40 @@ public class laberintoFinal {
                 System.out.print("Dirección no válida");
                 break;
         }
+        return spotX;
+    }
+
+    static int moverY(String directions, int spotX, int spotY, int limitInferiorY, int limitSuperiorY) {
+        switch (directions) {
+            case "este":
+                if ((spotY > limitInferiorY) && (labyrinth[spotX][spotY - 1] != 1)) {
+                    spotY = spotY - 1;
+                } else {
+                    System.out.print("Eso es un muro... ");
+                }
+                break;
+            case "oeste":
+                if ((spotY < limitSuperiorY) && (labyrinth[spotX][spotY + 1] != 1)) {
+                    spotY = spotY + 1;
+                } else {
+                    System.out.print("No puedes atravesar paredes... aun. ");
+                }
+                break;
+            default:
+                System.out.print("Dirección no válida");
+                break;
+        }
+        return spotY;
     }
 
     static void commands() {
         System.out.println("Comandos: [w]=Norte,[s]=Sur,[a]=Este,[d]=Oeste,[f]=Finalizar tu viaje");
     }
 
-    static void printLab() {
-
+    static void printLabyrinth(int spotX, int spotY) {
+        int torchRange = 3;
         String factor = "";
+
         System.out.println("");
         System.out.println("+----------------------------------------------------------+");
         for (int i = 0; i < (labyrinth.length); i++) {
@@ -129,7 +131,7 @@ public class laberintoFinal {
             for (int j = 0; j < (labyrinth[i].length); j++) {
                 factor = "  ";
                 if ((i == spotX) && (j == spotY)) {
-                    factor = "HM";
+                    factor = "<>";
                 } else {
 
                     if ((spotX + torchRange >= i) && (spotX - torchRange <= i) && (spotY + torchRange >= j)
@@ -154,14 +156,17 @@ public class laberintoFinal {
                 System.out.print(factor);
             }
             System.out.print("|");
-            Syste
+            System.out.println();
+        }
+        System.out.println("+----------------------------------------------------------+");
+    }
 
-    
-        }       
-
-    Sse.u.pitf    if ((i = 
-
-           }
+    static String vampire(int i, int j, String vamp) {
+        for (int v = 0; v < 3; v++) {
+            if ((i == vampSpotX[v]) && (j == vampSpotY[v])) {
+                vamp = "^^";
+            }
+        }
         return vamp;
     }
 
@@ -176,7 +181,7 @@ public class laberintoFinal {
         }
     }
 
-    static int newSpotX(int oldSpotX, int oldSpotY) {
+    static int newSpotX(int oldSpotX, int oldSpotY, int limitInferiorX, int limitSuperiorX) {
         int variable = movement();
         int newSpotX = oldSpotX;
 
@@ -193,11 +198,10 @@ public class laberintoFinal {
                 }
             }
         }
-
         return newSpotX;
     }
 
-    static int newSpotY(int oldSpotX, int oldSpotY) {
+    static int newSpotY(int oldSpotX, int oldSpotY, int limitInferiorY, int limitSuperiorY) {
         int variable = movement();
         int newSpotY = oldSpotY;
 
@@ -214,8 +218,6 @@ public class laberintoFinal {
                 }
             }
         }
-
         return newSpotY;
     }
-
 }
